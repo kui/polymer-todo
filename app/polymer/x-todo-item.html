@@ -1,0 +1,34 @@
+<link rel="import" href="x-todo-input.html">
+
+<polymer-element name="x-todo-item" extends="li" attributes="model">
+  <template>
+    <span hidden?="{{model.editing}}">
+      <span>{{model.description}}</span>
+      <button on-click="startEditAction">Edit</button>
+      <button on-click="deleteAction">Delete</button>
+    </span>
+    <x-todo-input
+       buttonText="Done"
+       hidden?="{{!model.editing}}"
+       on-input-button-click="endEditAction"
+       desc="{{model.description}}"
+       >
+    </x-todo-input>
+  </template>
+  <script>
+    Polymer('x-todo-item', {
+        model: null,
+        startEditAction: function() {
+            this.asyncFire('start-edit');
+            this.model.editing = true;
+        },
+        endEditAction: function() {
+            this.asyncFire('end-edit');
+            this.model.editing = false;
+        },
+        deleteAction: function() {
+            this.asyncFire('delete');
+        }
+    });
+  </script>
+</polymer-element>

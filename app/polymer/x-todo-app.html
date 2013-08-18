@@ -1,0 +1,46 @@
+<link rel="import" href="x-todo-input.html">
+<link rel="import" href="x-todo-item.html">
+
+<polymer-element name="x-todo-app" attributes="modelId">
+  <template>
+    <p>Polymer ToDo</p>
+    <x-todo-input id="newItem" on-input-button-click="addItemAction" desc=""></x-todo-input>
+    <ul on-input-button-click="hoge" on-end-edit="endEditAction">
+      <template repeat="{{model.items}}">
+        <li is="x-todo-item" model="{{}}" on-delete="deleteItemAction">
+      </template>
+    </ul>
+  </template>
+  <script>
+    Polymer('x-todo-app', {
+
+        modelId: "",
+        model: null,
+
+        enteredDocument: function() {
+            console.debug("entered document %o", this.$.newItem);
+            this.$.newItem.focus();
+        },
+
+        modelIdChanged: function() {
+            this.model = document.querySelector('#' + this.modelId);
+            console.debug(this.model)
+        },
+
+        addItemAction: function(event, detail, sender) {
+            console.debug('addItemAction: %o', arguments);
+            this.model.addItem(sender.desc);
+            sender.desc = '';
+            sender.focus();
+        },
+
+        endEditAction: function(event, detail, sender) {
+            this.model.itemsChanged();
+        },
+
+        deleteItemAction: function(event, detail, sender) {
+            this.model.deleteItem(sender.model);
+        }
+    });
+  </script>
+</polymer-element>

@@ -1,0 +1,22 @@
+<polymer-element name="x-todo-input" attributes="desc buttonText">
+  <template>
+    <input id="textForm" type="text" value="{{desc}}">
+    <button on-click="buttonClickAction">{{buttonText}}</button>
+  </template>
+  <script>
+    Polymer('x-todo-input', {
+        desc: '',
+        buttonText: 'Add',
+
+        focus: function() {
+            console.debug("focus: %o", this.$.textForm)
+            this.$.textForm.focus();
+        },
+
+        buttonClickAction: function() {
+            console.debug('argument %o', arguments);
+            this.asyncFire('input-button-click');
+        },
+    });
+  </script>
+</polymer-element>
