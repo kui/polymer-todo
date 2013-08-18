@@ -26,19 +26,19 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: ['<%= yeoman.app %>/{,*/}*.coffee'],
+                files: ['<%= yeoman.app %>/**/*.coffee'],
                 tasks: ['coffee:dist']
             },
             coffeeTest: {
-                files: ['test/spec/{,*/}*.coffee'],
+                files: ['test/spec/**/*.coffee'],
                 tasks: ['coffee:test']
             },
             compass: {
-                files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+                files: ['<%= yeoman.app %>/**/*.{scss,sass}'],
                 tasks: ['compass:server']
             },
             styles: {
-                files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+                files: ['<%= yeoman.app %>/**/*.css'],
                 tasks: ['copy:styles']
             },
             livereload: {
@@ -46,10 +46,10 @@ module.exports = function (grunt) {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
-                    '<%= yeoman.app %>/{,*}/*.html',
-                    '.tmp/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/{,*/}*.js',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.app %>/**/*.html',
+                    '.tmp/**/*.css',
+                    '{.tmp,<%= yeoman.app %>}/**/*.js',
+                    '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
         },
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/{,*/}*.js',
+                '<%= yeoman.app %>/**/*.js',
                 '!<%= yeoman.app %>/scripts/vendor/*',
                 'test/spec/{,*/}*.js'
             ]
@@ -132,7 +132,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.app %>',
-                    src: '{,*/}*.coffee',
+                    src: '**/*.coffee',
                     dest: '.tmp',
                     ext: '.js'
                 }]
@@ -149,8 +149,8 @@ module.exports = function (grunt) {
         },
         compass: {
             options: {
-                sassDir: '<%= yeoman.app %>/styles',
-                cssDir: '.tmp/styles',
+                sassDir: '<%= yeoman.app %>',
+                cssDir: '.tmp',
                 generatedImagesDir: '.tmp/images/generated',
                 imagesDir: '<%= yeoman.app %>/images',
                 javascriptsDir: '<%= yeoman.app %>/scripts',
